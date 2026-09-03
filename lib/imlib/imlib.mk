@@ -25,6 +25,7 @@
 IMLIB_SRC_C += \
     agast.c \
     apriltag.c \
+    aruco5x5_50.c \
     bayer.c \
     binary.c \
     blob.c \

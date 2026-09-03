@@ -3552,6 +3552,11 @@ static mp_obj_t py_image_find_apriltags(size_t n_args, const mp_obj_t *pos_args,
                 name = MP_OBJ_NEW_QSTR(MP_QSTR_TAG25H9);
                 break;
             #endif
+            #ifdef IMLIB_ENABLE_APRILTAGS_ARUCO5X5_50
+            case ARUCO5X5_50:
+                name = MP_OBJ_NEW_QSTR(MP_QSTR_ARUCO5X5_50);
+                break;
+            #endif
             #ifdef IMLIB_ENABLE_APRILTAGS_TAG36H10
             case TAG36H10:
                 name = MP_OBJ_NEW_QSTR(MP_QSTR_TAG36H10);
@@ -5001,6 +5006,7 @@ static const mp_rom_map_elem_t globals_dict_table[] = {
     #endif
     #ifdef IMLIB_ENABLE_APRILTAGS_TAG25H9
     {MP_ROM_QSTR(MP_QSTR_TAG25H9),             MP_ROM_INT(TAG25H9)},
+    {MP_ROM_QSTR(MP_QSTR_ARUCO5X5_50),         MP_ROM_INT(ARUCO5X5_50)},
     #endif
     #ifdef IMLIB_ENABLE_APRILTAGS_TAG36H10
     {MP_ROM_QSTR(MP_QSTR_TAG36H10),            MP_ROM_INT(TAG36H10)},

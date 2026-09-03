@@ -1134,13 +1134,15 @@ typedef enum apriltag_families {
     TAGCUSTOM48H12   = (1 << 6),
     TAGSTANDARD41H12 = (1 << 7),
     TAGSTANDARD52H13 = (1 << 8),
+    ARUCO5X5_50      = (1 << 9),
 } apriltag_families_t;
 
 typedef struct find_apriltags_list_lnk_data {
     point_t corners[4];
     rectangle_t rect;
     uint16_t id;
-    uint8_t family, hamming;
+    uint16_t family;   // widened: family flags now exceed 8 bits (ARUCO5X5_50 = 1<<9)
+    uint8_t hamming;
     float centroid_x, centroid_y;
     float goodness, decision_margin;
     float x_translation, y_translation, z_translation;

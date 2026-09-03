@@ -43,6 +43,9 @@
 #ifdef IMLIB_ENABLE_APRILTAGS_TAGSTANDARD52H13
 #include "tagStandard52h13.h"
 #endif
+#ifdef IMLIB_ENABLE_APRILTAGS_ARUCO5X5_50
+#include "aruco5x5_50.h"
+#endif
 
 // Internal AprilTag functions.
 extern int quad_update_homographies(struct quad *quad);
@@ -70,6 +73,14 @@ void imlib_find_apriltags(list_t *out, image_t *ptr, rectangle_t *roi, apriltag_
     if (families & TAG25H9) {
         tf_tag25h9 = tag25h9_create();
         apriltag_detector_add_family(td, tf_tag25h9);
+    }
+    #endif
+
+    #ifdef IMLIB_ENABLE_APRILTAGS_ARUCO5X5_50
+    apriltag_family_t *tf_aruco5x5_50 = NULL;
+    if (families & ARUCO5X5_50) {
+        tf_aruco5x5_50 = aruco5x5_50_create();
+        apriltag_detector_add_family(td, tf_aruco5x5_50);
     }
     #endif
 
@@ -186,6 +197,11 @@ void imlib_find_apriltags(list_t *out, image_t *ptr, rectangle_t *roi, apriltag_
             lnk_data.family |= TAG25H9;
         }
         #endif
+        #ifdef IMLIB_ENABLE_APRILTAGS_ARUCO5X5_50
+        if (tf_aruco5x5_50 && det->family == tf_aruco5x5_50) {
+            lnk_data.family |= ARUCO5X5_50;
+        }
+        #endif
         #ifdef IMLIB_ENABLE_APRILTAGS_TAG36H10
         if (tf_tag36h10 && det->family == tf_tag36h10) {
             lnk_data.family |= TAG36H10;
@@ -256,6 +272,11 @@ void imlib_find_apriltags(list_t *out, image_t *ptr, rectangle_t *roi, apriltag_
     #ifdef IMLIB_ENABLE_APRILTAGS_TAG25H9
     if (tf_tag25h9) {
         tag25h9_destroy(tf_tag25h9);
+    }
+    #endif
+    #ifdef IMLIB_ENABLE_APRILTAGS_ARUCO5X5_50
+    if (tf_aruco5x5_50) {
+        aruco5x5_50_destroy(tf_aruco5x5_50);
     }
     #endif
     #ifdef IMLIB_ENABLE_APRILTAGS_TAG36H10
